@@ -1,0 +1,5 @@
+---
+image: "my_registry/idrac_to_kafka:XXXX"
+imagePullSecretsOption:
+  imagePullSecrets:
+    - name: registry-pull-token

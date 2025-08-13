@@ -1,0 +1,9 @@
+click
+Flask
+gunicorn
+requests
+urllib3
+Werkzeug
+cryptography
+gunicorn
+

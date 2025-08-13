@@ -1,0 +1,37 @@
+FROM python:3.9.5-alpine3.13 AS builder
+
+# Avoid buffering in Python output
+ENV PYTHONUNBUFFERED=1
+
+# Disable proxy explicitly if inherited from build environment
+ENV https_proxy=""
+ENV http_proxy=""
+
+# Copy all necessary application and test files
+COPY server.py \
+     wsgi.py \
+     requirements.txt \
+     test_reverse_dns.py \
+     test_kafka_bus_post.py \
+     /
+
+# Install helpful packages
+RUN echo "Install packages" \
+    && apk update \
+    && apk add  --no-cache \
+       cmd:dig \
+       bash \
+       curl \
+       tree
+
+# Upgrade pip and install Python dependencies
+RUN echo "Installing Python dependencies" \
+    && python3 -m pip install --upgrade pip setuptools wheel PySocks \ 
+    && pip3 install --no-cache-dir -r /requirements.txt \
+    && rm -rf /root/.cache/pip
+
+LABEL maintainer="John Stile <jstile@lbl.gov>" \
+      version="0.1"
+
+# Default shell
+CMD ["/bin/ash"]

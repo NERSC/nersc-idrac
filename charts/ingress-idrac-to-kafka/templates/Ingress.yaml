@@ -1,0 +1,24 @@
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: ingress-idrac-to-kafka
+  namespace: telem
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: idrac-to-kafka
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - idrac-to-kafka
+

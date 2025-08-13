@@ -1,0 +1,25 @@
+---
+enabled: true
+namespaceOverride: ingress-nginx
+controller:
+  containerPort:
+    http: 80
+    https: 443
+  metrics:
+    enabled: true
+  extraArgs:
+    update-status: "false"
+  service:
+    type: LoadBalancer
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ports:
+      http: 8080
+      https: 443
+      extra-http: 8080
+      extra-https: 8443
+    targetPorts:
+      http: http
+      https: https
+      extra-http: http
+      extra-https: https

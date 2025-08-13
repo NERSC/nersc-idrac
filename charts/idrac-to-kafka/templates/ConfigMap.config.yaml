@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: idrac-to-kafka-config
+  namespace: telem
+data:
+  config.py: |-
+    loglevel = "debug"          # Logging level
+    save_metricreports = False  # Write the reports to a file
+    save_events = False         # Write the events to a file
+    save_other = False          # Write the other to a file

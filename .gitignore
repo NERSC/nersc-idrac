@@ -1,0 +1,6 @@
+Chart.lock
+*.tgz
+*.gz
+*.tar
+helmfile
+linux-amd64

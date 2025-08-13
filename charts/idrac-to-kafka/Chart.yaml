@@ -1,0 +1,5 @@
+---
+apiVersion: v2
+name: idrac-to-kafka
+version: 0.1.0
+description: idrac-to-kafka subchart

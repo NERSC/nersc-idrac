@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: idrac-to-kafka
+  namespace: telem
+  labels:
+    app: idrac-to-kafka
+spec:
+  serviceName: idrac-to-kafka
+  replicas: 1
+  selector:
+    matchLabels:
+      app: idrac-to-kafka
+  template:
+    metadata:
+      labels:
+        app: idrac-to-kafka
+    spec:
+      {{- if .Values.imagePullSecretsOption }}
+      {{- toYaml .Values.imagePullSecretsOption | nindent 6 }}
+      {{- end }}
+      containers:
+      - name: listener
+        image: {{ .Values.image }}
+        imagePullPolicy: IfNotPresent
+        args:
+          - /bin/sh
+          - -c
+          - gunicorn --bind 0.0.0.0:8080 wsgi:app
+        resources: {}
+        volumeMounts:
+          - name: idrac-to-kafka-config
+            mountPath: /config
+      volumes:
+      - name: idrac-to-kafka-config
+        configMap:
+          name: idrac-to-kafka-config

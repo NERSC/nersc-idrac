@@ -1,0 +1,7 @@
+---
+enabled: true
+namespace: telem
+image: my_registry/idrac_to_kafka:20250813T0630
+imagePullSecretsOption:
+  imagePullSecrets:
+  - name: registry-pull-token

@@ -1,0 +1,23 @@
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: events
+  namespace: telem
+  labels:
+    strimzi.io/cluster: "cluster"
+spec:
+  partitions: 2
+  replicas: 2
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: metricreports
+  namespace: telem
+  labels:
+    strimzi.io/cluster: "cluster"
+spec:
+  partitions: 2
+  replicas: 2
+

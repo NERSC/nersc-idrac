@@ -1,0 +1,5 @@
+---
+apiVersion: v2
+name: ingress-idrac-to-kafka
+version: 0.1.0
+description: Nginx Ingress definition for idrac-to-kafka service

@@ -3,6 +3,11 @@ Abstract
 
 Contains things to install strimzi-kafka-operator, nginx-ingress-controler, and idrac-to-kafka
 
+Pipeline
+---
+
+![Pipeline Diagram](images/redfish_pipline.svg)
+
 Dirs
 ---
 ```console
@@ -258,3 +263,19 @@ Debugging
 # show helm chart default value.yaml for hints on configuraiton
 helm show values ingress-nginx/ingress-nginx  |less
 ```
+
+Scripting
+---
+
+Tail a kafka topic (eg. events, metricreports, nersc-ldms)
+
+```console
+kubectl -n telem exec -i cluster-broker-4 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic <YOUR_TOPIC>
+```
+
+List kafka topics
+```
+kubectl  -n telem exec -it cluster-broker-4 -- /bin/bash -c "/opt/kafka/bin/kafka-topics.sh  --bootstrap-server localhost:9092 --list"
+```
+
+
